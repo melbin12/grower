@@ -1,0 +1,41 @@
+const data ={
+    products:[
+        {
+            name: 'BENEVIA® INSECTICIDE ',
+            slug:'BENEVIA®-INSECTICIDE ',
+            category:'pestiside(chemichal)',
+            image:'/images/p1.jpg',
+            price:400,
+            countInstock:10,
+            brand:'zet',
+            rating:4,
+            numReviews:10,
+            description:'echofrindly',
+        },
+        {
+            name: 'PROFEX SUPER INSECTICIDE ',
+            slug:'PROFEX-SUPER-INSECTICIDE ',
+            category:'pestiside(chemichal)',
+            image:'/images/p2.jpg',
+            price:242,
+            countInstock:10,
+            brand:'zet',
+            rating:4,
+            numReviews:10,
+            description:'echofrindly',
+        },
+        {
+            name: 'ALIKA INSECTICIDE ',
+            slug:'ALIKA-INSECTICIDE ',
+            category:'pestiside(chemichal)',
+            image:'/images/p3.jpg',
+            price:350,
+            countInstock:10,
+            brand:'zet',
+            rating:4,
+            numReviews:10,
+            description:'echofrindly',
+        },
+    ],
+};
+export default data;

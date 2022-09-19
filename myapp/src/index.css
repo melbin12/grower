@@ -6,13 +6,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-header{
-  background-color: #404040;
-  padding: 1rem;
+main{
+ flex:1;
 }
-header a {
-  color:#ffffff ;
-  font-weight:bold;
-  text-decoration: none;
+
+.site-container{
+min-height: 100vh;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.product{
+  border: 2px #404040 solid;
+  margin: 1rem;
+}
+.product img{
+  width: 100%;
+  max-width: 400px;
+}
+.product-info{
+  margin: 1rem;
 }
