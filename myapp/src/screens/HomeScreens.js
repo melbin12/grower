@@ -1,7 +1,14 @@
 import { useEffect, useReducer, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Product from '../components/Product';
+import { Helmet } from 'react-helmet-async';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import Container from 'react-bootstrap/esm/Container';
+import Carousel from 'react-bootstrap/esm/Carousel';
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -16,7 +23,6 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
 function HomeScreen() {
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
@@ -33,39 +39,72 @@ function HomeScreen() {
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
-
       // setProducts(result.data);
     };
     fetchData();
   }, []);
-  return (
+  return (<Container fluid>
     <div>
+      <Helmet>
+        <title>Grower</title>
+      </Helmet> 
+      <Carousel>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://www.syngenta.co.in/sites/g/files/zhg496/f/media/2021/03/23/masthead_ax.jpeg"
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h1>50% OFF</h1>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://www.syngenta.co.in/sites/g/files/zhg496/f/media/2022/06/06/graliz-bactriguard-banner-_-2000x-600_v3.jpg"
+          alt="Second slide"
+        />
+
+        <Carousel.Caption>
+          <h1>60% OFF</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="http://www.manishaagro.com/images/seeds-banner-maize.jpg"
+          alt="Third slide"
+        />
+
+        <Carousel.Caption>
+          <h1>70% OFF</h1>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
       <h1>Featured Products</h1>
       <div className="products">
-      {loading ? (
-          <div>Loading...</div>
+        {loading ? (
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          products.map((product) => (
-            <div className="product" key={product.slug}>
-              <Link to={`/product/${product.slug}`}>
-              <img src={product.image} alt={product.name} />
-              </Link>
-              <div className="product-info">
-                <Link to={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </Link>
-                <p>
-                  <strong>${product.price}</strong>
-                </p>
-                <button>Add to cart</button>
-              </div>
-            </div>
-      ))
-      )}
+          <Row>
+            {products.map((product) => (
+              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                <Product product={product}></Product>
+              </Col>
+            ))}
+          </Row>
+        )}
+      </div>
     </div>
-  </div>
-);
+    </Container>
+  );
 }
 export default HomeScreen;
